@@ -1,47 +1,44 @@
 import React from 'react'
+
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import * as Yup from "yup";
 
-const Usignup = () => {
+const Login = () => {
 
     const history = useHistory()
 
-    const Signupschema = Yup.object().shape({
-        uname: Yup.string().required(),
+
+    const Loginschema = Yup.object().shape({
         email: Yup.string().email().required(),
         password: Yup.string().required(),
     });
 
 
     return (
-        <div className='d-flex justify-content-center align-items-center mt-4'>
+        <div className='d-flex justify-content-center align-items-center mt-120 mb-5 ms-3 me-3'>
             <div className="box-1">
-                <h1 className='mb-4'>User Signup</h1>
+                <h1 className='mb-4 text-white'> Technician <span className='icon-color'>Login</span> page  </h1>
                 <Formik
                     initialValues={{
-                        uname: '',
                         email: '',
                         password: '',
                     }}
-                    validationSchema={Signupschema}
+                    validationSchema={Loginschema}
                     onSubmit={async (values) => {
-                        axios.post('https://blog-backend-nklg.onrender.com/user/signup', values)
+                        axios.post('https://garage-api-1vrb.onrender.com/technician/login', values)
                             .then((res) => {
-                                console.log(res.data.data);
-                                history.push('/user/login')
+                                console.log(res.data);
+                                localStorage.setItem('techniciantoken', res.data.token)
+                                history.push('/technician')
                             })
                             .catch((error) => {
-                                console.log(error.response.data.message);
+                                alert(error.response.data.message);
                             })
                     }}
                 >
                     <Form className='d-flex flex-column'>
-                        <label htmlFor="uname" className='fw-bold' >uname : </label>
-                        <Field id="uname" className='in-gov' name="uname" placeholder="uname" />
-                        <span><ErrorMessage name='uname' /><br /><br /></span>
-
                         <label htmlFor="email" className='fw-bold'>Email :</label>
                         <Field
                             className='in-gov'
@@ -57,10 +54,10 @@ const Usignup = () => {
                         <span><ErrorMessage name='password' /><br /><br /></span>
 
                         <div className='d-flex justify-content-center'>
-                            <button type="submit" className='button submit'>Signup</button>
+                            <button type="submit" className='button'>Submit</button>
                         </div>
-                        {/* <p className='text-center mt-3'><Link to="/user/login" className="text-dark ">Already Have An Account.?</Link></p> */}
-                        <Link to="/user/login" className="text-dark mt-3 text-center"><li className=' me-2 fw-bold  blog-btn'>Already Have An Account.?</li></Link>
+
+                        <p className='text-center mt-3 bor'><Link to="/technician-signup" className="text-white">Don't Have An Account ? <span className='icon-color'>Please Signup</span></Link></p>
                     </Form>
                 </Formik>
             </div>
@@ -68,4 +65,4 @@ const Usignup = () => {
     )
 }
 
-export default Usignup
+export default Login
