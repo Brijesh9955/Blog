@@ -19,7 +19,7 @@ const Service = () => {
         form.append('decription', values.decription);
         form.append('cost', values.cost);
 
-        axios.post('https://garage-api-1vrb.onrender.com/service/create', form,
+        axios.post('https://garage-backend-ld7j.onrender.com/service/create', form,
             {
                 headers: {
                     techniciantoken: techniciantoken,

@@ -23,7 +23,7 @@ const Allservice = () => {
   }, [])
 
   const getService = () => {
-    axios.get('https://garage-api-1vrb.onrender.com/service/find')
+    axios.get('https://garage-backend-ld7j.onrender.com/service/find')
       .then((res) => {
         console.log(res.data.data);
         setService(res.data.data)
@@ -91,7 +91,7 @@ const Allservice = () => {
               service.map((el, index) => {
                 return <div className="col-lg-3 col-sm-6 col-12" key={index} onClick={card} >
                   <Card className='p-0 box pos-rel '>
-                    <div className="img-box"><Card.Img variant="top" className='p-0' src={'https://garage-api-1vrb.onrender.com/images/' + el.image} /></div>
+                    <div className="img-box"><Card.Img variant="top" className='p-0' src={'https://garage-backend-ld7j.onrender.com/images/' + el.image} /></div>
                     <Card.Body>
                       <div className='icon-color'><Card.Title className='pt-1 fw-bold  text-uppercase' >{el.serviceName}</Card.Title></div>
                       {/* <p className='pt-1  mb-2 fs-18 text-color'>{el.decription}</p>
